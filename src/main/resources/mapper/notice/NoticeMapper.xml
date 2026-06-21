@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.feedapi.notice.mapper.NoticeMapper">
+
+    <select id="getNotice" parameterType="org.feedapi.notice.dto.NoticeDTO" resultType="org.feedapi.notice.dto.NoticeDTO">
+        SELECT NO
+               , TITLE
+               , WRITER
+               , REG_DATE
+        FROM NOTICE
+        WHERE 1=1
+        <if test="'searchTitle'.equals(searchType)">
+            AND TITLE LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        <if test="'searchWriter'.equals(searchType)">
+            AND WRITER LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        ORDER BY NO DESC
+        OFFSET (#{page} - 1) * 10 ROWS FETCH NEXT 10 ROWS ONLY
+    </select>
+
+    <select id="getNoticeCnt" parameterType="org.feedapi.notice.dto.NoticeDTO" resultType="Integer">
+        SELECT COUNT(*) AS cnt
+        FROM NOTICE
+        WHERE 1=1
+        <if test="'searchTitle'.equals(searchType)">
+            AND TITLE LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        <if test="'searchWriter'.equals(searchType)">
+            AND WRITER LIKE '%'||#{searchKeyword}||'%'
+        </if>
+    </select>
+
+    <insert id="addNotice" parameterType="org.feedapi.notice.dto.NoticeDTO">
+        INSERT INTO notice (no, title, writer, reg_date)
+        VALUES(#{no}, #{title}, #{writer}, #{reg_date})
+    </insert>
+
+    <select id="getDetailNotice" parameterType="Integer" resultType="org.feedapi.notice.dto.NoticeDTO">
+        SELECT NO
+               , TITLE
+               , WRITER
+               , REG_DATE
+        FROM NOTICE
+        WHERE NO = #{no}
+    </select>
+
+    <update id="updateNotice" parameterType="org.feedapi.notice.dto.NoticeDTO">
+        UPDATE NOTICE
+        SET NO = #{no}
+            , TITLE = #{title}
+            , WRITER = #{writer}
+            , REG_DATE = #{reg_date}
+        WHERE NO = #{no}
+    </update>
+
+    <delete id="deleteNotice" parameterType="Integer">
+        DELETE FROM NOTICE
+        WHERE NO = #{no}
+    </delete>
+
+</mapper>
