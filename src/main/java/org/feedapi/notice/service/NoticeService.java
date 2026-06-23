@@ -1,13 +1,14 @@
 package org.feedapi.notice.service;
 
+import org.feedapi.notice.dto.AddNoticeDTO;
 import org.feedapi.notice.dto.NoticeDTO;
 import org.feedapi.notice.dto.NoticeResDTO;
+import org.feedapi.notice.dto.UpdateNoticeDTO;
 import org.feedapi.notice.mapper.NoticeMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(readOnly = true)
 public class NoticeService {
     private final NoticeMapper noticeMapper;
 
@@ -15,8 +16,9 @@ public class NoticeService {
         this.noticeMapper = noticeMapper;
     }
 
-    public void addNotice(NoticeDTO noticeDTO) {
-        noticeMapper.addNotice(noticeDTO);
+    @Transactional
+    public void addNotice(AddNoticeDTO addNoticeDTO) {
+        noticeMapper.addNotice(addNoticeDTO);
     }
 
     public NoticeResDTO getNoitce(NoticeDTO  noticeDTO) {
@@ -32,10 +34,12 @@ public class NoticeService {
         return noticeMapper.getDetailNotice(no);
     }
 
-    public void updateNotice(NoticeDTO noticeDTO) {
-        noticeMapper.updateNotice(noticeDTO);
+    @Transactional
+    public void updateNotice(UpdateNoticeDTO updateNoticeDTO) {
+        noticeMapper.updateNotice(updateNoticeDTO);
     }
 
+    @Transactional
     public void deleteNotice(Integer no) {
         noticeMapper.deleteNotice(no);
     }

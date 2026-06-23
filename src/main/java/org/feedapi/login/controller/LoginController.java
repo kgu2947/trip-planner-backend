@@ -15,7 +15,7 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @PostMapping("/tryLogin")
+    @PostMapping("/login")
     public LoginDataDTO tryLogin(@RequestBody LoginDTO loginDTO){
         return loginService.tryLogin(loginDTO);
     }

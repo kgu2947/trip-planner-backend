@@ -8,12 +8,16 @@
     <select id="getNotice" parameterType="org.feedapi.notice.dto.NoticeDTO" resultType="org.feedapi.notice.dto.NoticeDTO">
         SELECT NO
                , TITLE
+               , CONTENT
                , WRITER
-               , REG_DATE
+               , TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE
         FROM NOTICE
         WHERE 1=1
         <if test="'searchTitle'.equals(searchType)">
             AND TITLE LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        <if test="'searchContent'.equals(searchType)">
+            AND CONTENT LIKE '%'||#{searchKeyword}||'%'
         </if>
         <if test="'searchWriter'.equals(searchType)">
             AND WRITER LIKE '%'||#{searchKeyword}||'%'
@@ -29,31 +33,42 @@
         <if test="'searchTitle'.equals(searchType)">
             AND TITLE LIKE '%'||#{searchKeyword}||'%'
         </if>
+        <if test="'searchContent'.equals(searchType)">
+            AND CONTENT LIKE '%'||#{searchKeyword}||'%'
+        </if>
         <if test="'searchWriter'.equals(searchType)">
             AND WRITER LIKE '%'||#{searchKeyword}||'%'
         </if>
     </select>
 
-    <insert id="addNotice" parameterType="org.feedapi.notice.dto.NoticeDTO">
-        INSERT INTO notice (no, title, writer, reg_date)
-        VALUES(#{no}, #{title}, #{writer}, #{reg_date})
+    <insert id="addNotice" parameterType="org.feedapi.notice.dto.AddNoticeDTO">
+        INSERT INTO notice (no
+                            , title
+                            , content
+                            , writer
+                            , reg_date)
+        VALUES(NOTICE_SEQ.NEXTVAL
+               , #{title}
+               , #{content}
+               , #{writer}
+               , SYSDATE)
     </insert>
 
     <select id="getDetailNotice" parameterType="Integer" resultType="org.feedapi.notice.dto.NoticeDTO">
         SELECT NO
                , TITLE
+               , CONTENT
                , WRITER
                , REG_DATE
         FROM NOTICE
         WHERE NO = #{no}
     </select>
 
-    <update id="updateNotice" parameterType="org.feedapi.notice.dto.NoticeDTO">
+    <update id="updateNotice" parameterType="org.feedapi.notice.dto.UpdateNoticeDTO">
         UPDATE NOTICE
         SET NO = #{no}
             , TITLE = #{title}
-            , WRITER = #{writer}
-            , REG_DATE = #{reg_date}
+            , CONTENT = #{content}
         WHERE NO = #{no}
     </update>
 

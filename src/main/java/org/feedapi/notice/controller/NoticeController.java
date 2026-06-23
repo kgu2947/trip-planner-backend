@@ -1,7 +1,9 @@
 package org.feedapi.notice.controller;
 
+import org.feedapi.notice.dto.AddNoticeDTO;
 import org.feedapi.notice.dto.NoticeDTO;
 import org.feedapi.notice.dto.NoticeResDTO;
+import org.feedapi.notice.dto.UpdateNoticeDTO;
 import org.feedapi.notice.service.NoticeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,27 +17,27 @@ public class NoticeController {
         this.noticeService = noticeService;
     }
 
-    @GetMapping("/getNotice")
+    @GetMapping("/notice")
     public NoticeResDTO getNotice(NoticeDTO noticeDTO){
         return noticeService.getNoitce(noticeDTO);
     }
 
-    @GetMapping("/getDetailNotice/{no}")
+    @GetMapping("/notice/{no}")
     public NoticeDTO getDetailNotice(@PathVariable Integer no){
         return noticeService.getDetailNotice(no);
     }
 
-    @PostMapping("/addNotice")
-    public void addNotice(@RequestBody NoticeDTO noticeDTO){
-        noticeService.addNotice(noticeDTO);
+    @PostMapping("/notice")
+    public void addNotice(@RequestBody AddNoticeDTO addNoticeDTO){
+        noticeService.addNotice(addNoticeDTO);
     }
 
-    @PutMapping("/updateNotice")
-    public void updateNotice(@RequestBody NoticeDTO noticeDTO){
-        noticeService.updateNotice(noticeDTO);
+    @PutMapping("/notice")
+    public void updateNotice(@RequestBody UpdateNoticeDTO updateNoticeDTO){
+        noticeService.updateNotice(updateNoticeDTO);
     }
 
-    @DeleteMapping("/deleteNotice/{no}")
+    @DeleteMapping("/notice/{no}")
     public void deleteNotice(@PathVariable Integer no){
         noticeService.deleteNotice(no);
     }
