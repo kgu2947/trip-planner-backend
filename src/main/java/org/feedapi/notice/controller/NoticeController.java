@@ -6,6 +6,10 @@ import org.feedapi.notice.dto.NoticeResDTO;
 import org.feedapi.notice.dto.UpdateNoticeDTO;
 import org.feedapi.notice.service.NoticeService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -28,8 +32,9 @@ public class NoticeController {
     }
 
     @PostMapping("/notice")
-    public void addNotice(@RequestBody AddNoticeDTO addNoticeDTO){
-        noticeService.addNotice(addNoticeDTO);
+    public void addNotice(@ModelAttribute AddNoticeDTO addNoticeDTO
+                          , @RequestPart(required = false) List<MultipartFile> files) throws IOException {
+        noticeService.addNotice(addNoticeDTO, files);
     }
 
     @PutMapping("/notice")

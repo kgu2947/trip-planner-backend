@@ -42,12 +42,16 @@
     </select>
 
     <insert id="addNotice" parameterType="org.feedapi.notice.dto.AddNoticeDTO">
+        <selectKey order="BEFORE" resultType="Integer" keyProperty="noticeNo">
+            SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+
         INSERT INTO notice (no
                             , title
                             , content
                             , writer
                             , reg_date)
-        VALUES(NOTICE_SEQ.NEXTVAL
+        VALUES(#{noticeNo}
                , #{title}
                , #{content}
                , #{writer}

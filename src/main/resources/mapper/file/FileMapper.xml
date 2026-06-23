@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.feedapi.file.mapper.FileMapper">
+
+    <insert id="addFileInfo" parameterType="org.feedapi.file.dto.FileDTO">
+        <selectKey order="BEFORE" resultType="Integer" keyProperty="file_no">
+            SELECT FILE_ATTACH_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+
+        INSERT INTO file_attach (file_no
+                                 , TARGET_TYPE
+                                 , TARGET_ID
+                                 , ORIGIN_NAME
+                                 , SAVED_NAME
+                                 , FILE_PATH
+                                 , REG_DATE)
+        VALUES (#{file_no}
+                , #{targetType}
+                , #{targetId}
+                , #{originName}
+                , #{savedName}
+                , #{filePath}
+                , SYSDATE)
+    </insert>
+
+</mapper>
