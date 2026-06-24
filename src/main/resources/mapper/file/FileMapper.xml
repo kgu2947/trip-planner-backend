@@ -26,4 +26,32 @@
                 , SYSDATE)
     </insert>
 
+    <select id="getFileCnt" resultType="Integer" parameterType="Integer">
+        SELECT COUNT(*) AS fileCnt
+        FROM FILE_ATTACH
+        WHERE TARGET_ID = #{no}
+    </select>
+
+    <select id="getFileList" resultType="org.feedapi.file.dto.FileDTO" parameterType="Integer">
+        SELECT FILE_NO AS file_no
+             , ORIGIN_NAME AS originName
+             , SAVED_NAME AS savedName
+             , FILE_PATH AS filePath
+             , TARGET_TYPE AS targetType
+             , TARGET_ID AS targetId
+        FROM FILE_ATTACH
+        WHERE TARGET_ID = #{no}
+    </select>
+
+    <select id="getFileInfo" resultType="org.feedapi.file.dto.FileDTO" parameterType="Integer">
+        SELECT FILE_NO AS file_no
+             , ORIGIN_NAME AS originName
+             , SAVED_NAME AS savedName
+             , FILE_PATH AS filePath
+             , TARGET_TYPE AS targetType
+             , TARGET_ID AS targetId
+        FROM FILE_ATTACH
+        WHERE FILE_NO = #{no}
+    </select>
+
 </mapper>

@@ -3,6 +3,7 @@ package org.feedapi.notice.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.feedapi.notice.dto.AddNoticeDTO;
 import org.feedapi.notice.dto.NoticeDTO;
+import org.feedapi.notice.dto.NoticeResDTO;
 import org.feedapi.notice.dto.UpdateNoticeDTO;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface NoticeMapper {
 
     List<NoticeDTO> getNotice(NoticeDTO noticeDTO);
 
-    NoticeDTO getDetailNotice(Integer no);
+    NoticeResDTO getDetailNotice(Integer no);
 
     void updateNotice(UpdateNoticeDTO updateNoticeDTO);
 

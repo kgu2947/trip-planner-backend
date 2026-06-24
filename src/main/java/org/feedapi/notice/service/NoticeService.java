@@ -53,8 +53,15 @@ public class NoticeService {
         return noticeResDTO;
     }
 
-    public NoticeDTO getDetailNotice(Integer no) {
-        return noticeMapper.getDetailNotice(no);
+    public NoticeResDTO getDetailNotice(Integer no) {
+
+        NoticeResDTO noticeResDTO = noticeMapper.getDetailNotice(no);
+        noticeResDTO.setFileCnt(fileMapper.getFileCnt(no));
+        noticeResDTO.setFileList(fileMapper.getFileList(no));
+
+        System.out.println(noticeResDTO.getFileList());
+
+        return noticeResDTO;
     }
 
     @Transactional

@@ -12,4 +12,10 @@ import java.util.List;
 public interface FileMapper {
 
     void addFileInfo(FileDTO fileInfo);
+
+    Integer getFileCnt(Integer no);
+
+    List<FileDTO> getFileList(Integer no);
+
+    FileDTO getFileInfo(Integer no);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class NoticeResDTO {
+public class NoticeResDTO extends NoticeDTO {
     private List<NoticeDTO> noticeList;
     private Integer cnt;
     private List<FileDTO> fileList;

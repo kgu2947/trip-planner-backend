@@ -58,7 +58,7 @@
                , SYSDATE)
     </insert>
 
-    <select id="getDetailNotice" parameterType="Integer" resultType="org.feedapi.notice.dto.NoticeDTO">
+    <select id="getDetailNotice" parameterType="Integer" resultType="org.feedapi.notice.dto.NoticeResDTO">
         SELECT NO
                , TITLE
                , CONTENT

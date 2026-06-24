@@ -27,7 +27,7 @@ public class NoticeController {
     }
 
     @GetMapping("/notice/{no}")
-    public NoticeDTO getDetailNotice(@PathVariable Integer no){
+    public NoticeResDTO getDetailNotice(@PathVariable Integer no){
         return noticeService.getDetailNotice(no);
     }
 
